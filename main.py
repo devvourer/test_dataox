@@ -77,7 +77,7 @@ async def gather_data():
         # Получаем записи с бд для проверки
         rows = s.query(Apartment).filter(Apartment.id > 1)
         for row in rows:
-            print(row.title, row.image_url)
+            print(f'({row.title}, {row.image_url}, {row.date}, {row.amount})')
 
 
 def main():
