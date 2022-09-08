@@ -3,7 +3,7 @@ from sqlalchemy.ext.declarative import declarative_base
 
 from datetime import datetime
 
-engine = create_engine('postgresql://beksultan:1@localhost/dataox_db', echo=True)
+engine = create_engine('postgresql://postgres:postgres@db/dataox', echo=True)
 
 Base = declarative_base()
 

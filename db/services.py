@@ -4,17 +4,10 @@ from sqlalchemy.orm import sessionmaker
 from decouple import config
 from datetime import datetime, timedelta
 
-from .models import Apartment
-
-engine = create_engine(config('db_config'))
+engine = create_engine('postgresql://postgres:postgres@db/dataox')
 
 session = sessionmaker(bind=engine)
 s = session()
-
-rows = s.query(Apartment).filter(Apartment.id > 1)
-
-for row in rows:
-    print(row)
 
 
 def set_values(data):
