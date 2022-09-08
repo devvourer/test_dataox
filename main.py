@@ -1,11 +1,10 @@
-import aiohttp
-import asyncio
-
 from bs4 import BeautifulSoup
 
 from db.services import format_date, set_values, s
 from db.models import Apartment
 
+import aiohttp
+import asyncio
 
 site = 'https://www.kijiji.ca/b-apartments-condos/city-of-toronto/c37l1700273'
 
@@ -63,8 +62,10 @@ async def gather_data():
 
     async with aiohttp.ClientSession() as session:
         response = await session.get(url)
+
         soup = BeautifulSoup(await response.text(), 'html.parser')
         pages_count = int(soup.find('div', class_='pagination').find_all('a')[-3].text)
+
         tasks = []
 
         for page in range(1, pages_count + 1):
@@ -73,10 +74,10 @@ async def gather_data():
 
         await asyncio.gather(*tasks)
 
-        # rows = s.query(Apartment).filter(Apartment.id > 1)
-        #
-        # for row in rows:
-        #     print(row.title, row.image_url)
+        # Получаем записи с бд для проверки
+        rows = s.query(Apartment).filter(Apartment.id > 1)
+        for row in rows:
+            print(row.title, row.image_url)
 
 
 def main():

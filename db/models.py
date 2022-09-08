@@ -1,8 +1,6 @@
 from sqlalchemy import create_engine, Column, Integer, String, DateTime
 from sqlalchemy.ext.declarative import declarative_base
 
-from datetime import datetime
-
 engine = create_engine('postgresql://postgres:postgres@db/dataox', echo=True)
 
 Base = declarative_base()
